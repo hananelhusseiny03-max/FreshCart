@@ -21,6 +21,18 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 import { Product } from "../../types/Products.types";
 
+
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+
+import {
+  addProductToCart,
+  getLoggedUserCart,
+} from "@/app/features/authen/cart/server/cart.actions";
+
+import { setCartInfo } from "@/app/features/authen/cart/store/cart.slice";
+
+
 export default function ProductInfo({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
 

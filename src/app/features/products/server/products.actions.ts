@@ -1,9 +1,13 @@
+
 "use server";
 
 import axios, { AxiosRequestConfig } from "axios";
-import { ProductsResponse, SingleProductResponse } from "../types/Products.types";
+import {
+  ProductsResponse,
+  SingleProductResponse,
+} from "../types/Products.types";
 
-export async function getProducts():Promise<ProductsResponse>{
+export async function getProducts(): Promise<ProductsResponse> {
   try {
     const options: AxiosRequestConfig = {
       url: "https://ecommerce.routemisr.com/api/v1/products",
@@ -17,7 +21,11 @@ export async function getProducts():Promise<ProductsResponse>{
   }
 }
 
-export async function getProductById({ id }: { id: string }):Promise<SingleProductResponse> {
+export async function getProductById({
+  id,
+}: {
+  id: string;
+}): Promise<SingleProductResponse> {
   try {
     const options: AxiosRequestConfig = {
       url: `https://ecommerce.routemisr.com/api/v1/products/${id}`,
@@ -29,4 +37,21 @@ export async function getProductById({ id }: { id: string }):Promise<SingleProdu
   } catch (error) {
     throw error;
   }
+}
+
+export async function getProductsByBrand({
+  brandId,
+}: {
+  brandId: string;
+}): Promise<ProductsResponse> {
+  const { data } = await axios.get<ProductsResponse>(
+    "https://ecommerce.routemisr.com/api/v1/products",
+    {
+      params: {
+        brand: brandId,
+      },
+    }
+  );
+
+  return data;
 }
